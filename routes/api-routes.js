@@ -1,7 +1,7 @@
 const router = require('express').Router();
 const Exercise = require('../models/Exercise');
 
-router.post('/api/exercise', ({ body }, res) => {
+router.post('/api/workouts', ({ body }, res) => {
     Exercise.create(body)
         .then(dbExercise => {
             res.json(dbExercise);
@@ -11,7 +11,7 @@ router.post('/api/exercise', ({ body }, res) => {
         });
 });
 
-router.get('/api/exercise', (req, res) => {
+router.get('/api/workouts', (req, res) => {
     Exercise.find({})
         .sort({ date: -1 })
         .then(dbExercise => {
@@ -22,4 +22,10 @@ router.get('/api/exercise', (req, res) => {
         });
 });
 
-module.exports = router;
+router.put('/api/workouts/:id', (req, res) => {
+    Exercise.update
+})
+
+router.
+
+    module.exports = router;
