@@ -192,6 +192,7 @@ function calculateTotalWeight(data) {
 }
 
 function workoutNames(data) {
+  console.log(data);
   let workouts = [];
 
   data.forEach((workout) => {
