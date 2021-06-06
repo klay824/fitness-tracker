@@ -41,4 +41,11 @@ const API = {
 
     return json;
   },
+
+  async getWorkoutsForPieDonut() {
+    const res = await fetch(`/api/workouts/pie-donut`);
+    const json = await res.json();
+
+    return json;
+  },
 };

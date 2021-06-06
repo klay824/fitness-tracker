@@ -29,8 +29,8 @@ function populateChart(data) {
 
   let line = document.querySelector('#canvas').getContext('2d');
   let bar = document.querySelector('#canvas2').getContext('2d');
-  let pie = document.querySelector('#canvas3').getContext('2d');
-  let pie2 = document.querySelector('#canvas4').getContext('2d');
+
+
 
   const daysOfWeek = [
     'Sunday',
@@ -131,6 +131,16 @@ function populateChart(data) {
       },
     },
   });
+}
+
+function populatePieDonutChart(data) {
+  let durations = data.map(({ totalDuration }) => totalDuration);
+  let pounds = calculateTotalWeight(data);
+  let workouts = workoutNames(data);
+  const colors = generatePalette();
+
+  let pie = document.querySelector('#canvas3').getContext('2d');
+  let pie2 = document.querySelector('#canvas4').getContext('2d');
 
   let pieChart = new Chart(pie, {
     type: 'pie',
@@ -171,7 +181,7 @@ function populateChart(data) {
       },
     },
   });
-}
+};
 
 function calculateTotalWeight(data) {
   let totals = [];
@@ -207,3 +217,4 @@ function workoutNames(data) {
 
 // get all workout data from back-end
 API.getWorkoutsInRange().then(populateChart);
+API.getWorkoutsForPieDonut().then(populatePieDonutChart);

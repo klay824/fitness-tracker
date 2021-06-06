@@ -46,7 +46,7 @@ router.get('/api/workouts', (req, res) => {
         });
 });
 
-// gets a range of workouts for the last 7 days, adds their total duration
+// gets a range of workouts for the last 7 days for line graph and bar chart, adds their total duration
 router.get('/api/workouts/range', (req, res) => {
     Workout.aggregate([
         {
@@ -65,6 +65,25 @@ router.get('/api/workouts/range', (req, res) => {
         .catch((err) => {
             res.json(err);
         });
+});
+
+// gets all workouts for pie and donut charts
+router.get('/api/workouts/pie-donut', (req, res) => {
+    Workout.aggregate([
+        {
+            $addFields: {
+                totalDuration: {
+                    $sum: '$exercises.duration',
+                },
+            },
+        },
+    ])
+        .then((dbWorkouts) => {
+            res.json(dbWorkouts);
+        })
+        .catch((err) => {
+            res.json(err);
+        })
 });
 
 // delete
