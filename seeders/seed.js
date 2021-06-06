@@ -30,6 +30,14 @@ let workoutSeed = [
         weight: 300,
         reps: 10,
         sets: 4
+      },
+      {
+        type: "resistance",
+        name: "Squats",
+        duration: 10,
+        weight: 150,
+        reps: 10,
+        sets: 4
       }
     ]
   },
@@ -119,6 +127,12 @@ let workoutSeed = [
         weight: 300,
         reps: 10,
         sets: 4
+      },
+      {
+        type: "cardio",
+        name: "Skating",
+        duration: 30,
+        distance: 2
       }
     ]
   }
