@@ -1,8 +1,9 @@
 const router = require('express').Router();
 const Workout = require('../models/workout.js');
 
-router.post('/api/workouts', (req, res) => {
-    Workout.create({})
+// creates a workout
+router.post('/api/workouts', ({ body }, res) => {
+    Workout.create(body)
         .then((dbWorkout) => {
             res.json(dbWorkout);
         })
@@ -11,6 +12,7 @@ router.post('/api/workouts', (req, res) => {
         });
 });
 
+// finds current workout, adds new workout to it
 router.put('/api/workouts/:id', ({ body, params }, res) => {
     Workout.findByIdAndUpdate(
         params.id,
@@ -25,6 +27,7 @@ router.put('/api/workouts/:id', ({ body, params }, res) => {
         });
 });
 
+// gets the workouts and adds the total duration of each
 router.get('/api/workouts', (req, res) => {
     Workout.aggregate([
         {
@@ -43,6 +46,7 @@ router.get('/api/workouts', (req, res) => {
         });
 });
 
+// gets a range of workouts for the last 7 days, adds their total duration
 router.get('/api/workouts/range', (req, res) => {
     Workout.aggregate([
         {
@@ -63,6 +67,7 @@ router.get('/api/workouts/range', (req, res) => {
         });
 });
 
+// delete
 router.delete('/api/workouts', ({ body }, res) => {
     Workout.findByIdAndDelete(body.id)
         .then(() => {
